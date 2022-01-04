@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!--공통된 내용-->
+    <definition name="tiles_template" template="/WEB-INF/views/temp/tiles_layout.jsp"> <!--최종 목적지, 내용 바꿔치기-->
+        <put-attribute name="header" value="/WEB-INF/views/temp/header.jsp" /> <!--헤더 바꿔치기-->
+        <put-attribute name="footer" value="/WEB-INF/views/temp/footer.jsp" /> <!--푸터 바꿔치기-->
+        <put-attribute name="common" value="common" />
+    </definition>
+
+
+    <!--1차와 2차 주소관련 일때-->
+    <definition name="*/*" extends="tiles_template"> <!--위에꺼 상속 받았음.-->
+
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+        <put-attribute name="addr1" value="{1}" />
+        <put-attribute name="addr2" value="{1}/{2}" />
+
+    </definition>
+</tiles-definitions>
