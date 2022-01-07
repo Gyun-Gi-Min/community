@@ -22,7 +22,7 @@ public class MenuPreparer implements ViewPreparer {
         menuList.add("연예인");
         menuList.add("뉴스");
         menuList.add("정치");
-        attributeContext.putAttribute("menuList",new Attribute(menuList),true);
+        attributeContext.putAttribute(Const.MENU_LIST,new Attribute(menuList),true);
 
     }
 }
