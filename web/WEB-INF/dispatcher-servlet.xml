@@ -24,6 +24,7 @@
 
     </bean>
 
+    <!--viewResolver로 받아서 , jsp 페이지를 뿌려준다~-->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
         <property name="order" value="1"/>   <!--이거먼저 검색하고 안되면 2로 넘어가겠다.-->
@@ -33,11 +34,10 @@
         <property name="definitions">
             <list>
                 <value>/WEB-INF/tiles.xml</value>
+                <!--prefix, suffix를 사용하는 internal대신 xml파일 설정으로 jsp 생성-->
             </list>
         </property>
         <property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
     </bean>
-
-
 
 </beans>

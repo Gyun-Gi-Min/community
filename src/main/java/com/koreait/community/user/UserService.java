@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
+
 @Service
 public class UserService {
 
@@ -35,39 +36,37 @@ public class UserService {
         UserEntity copyEntity = new UserEntity();
         BeanUtils.copyProperties(entity,copyEntity);
         // todo 지난번꺼랑 비교해보기 .
+        // entity가 원본 copyEntity가 복사대상
         //비밀번호 암호화
         String hashPw = BCrypt.hashpw(copyEntity.getUpw(),BCrypt.gensalt());
         copyEntity.setUpw(hashPw);
-        return mapper.insUser(entity);
+        return mapper.insUser(copyEntity);
 
     }
 
     public int login(UserEntity entity){
         UserEntity dbUser = null;
-
-        try{dbUser = mapper.selUser(entity);
-        //select해봐라 loginUser
-            }
-        catch (Exception e){
+        try {
+            dbUser = mapper.selUser(entity);
+            //select 해봐.
+        }catch (Exception e){
             e.printStackTrace();
-            return 0; //예외상황? 에러
+            return 0; //에러
         }
-        if(dbUser == null) {
-            //아이디로 찾는데 없다? 아이디없다
-            return 2;
+        if(dbUser==null){
+            return 2; // 없다? 아이디가 없다~
         }
-        else if(!BCrypt.checkpw(entity.getUpw(),dbUser.getUpw())) {
-            //비교해본다 entity의 pw와  selUser한 pw를
-            //일치하면 true. 세션에 담는다. key값은 Const.LOGIN_USER
-            return 3; //비번 다름
+        if(!BCrypt.checkpw(entity.getUpw(),dbUser.getUpw())){
+            return 3; //비번 틀렷음
         }
+        //이러한 과정을 거치고 내려오면 왜 다른값을 초기화하는거쥐?/
         dbUser.setUpw(null);
         dbUser.setRdt(null);
         dbUser.setMdt(null);
         userUtils.setLoginUser(dbUser);
         return 1; //로그인 성공
-
     }
+
 
 
 }

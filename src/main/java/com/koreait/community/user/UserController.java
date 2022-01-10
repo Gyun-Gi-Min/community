@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    UserService service;
+    private UserService service;
 
     @GetMapping("/login")
     public void login(){}
@@ -27,7 +28,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginProc(UserEntity entity, RedirectAttributes reAttr ){
-        int result =service.login(entity);
+        int result = service.login(entity);
         if(result !=1){
             reAttr.addFlashAttribute(Const.TRY_LOGIN,entity);
             switch (result){
@@ -46,7 +47,7 @@ public class UserController {
             return "redirect:/user/login";
 
         }
-        return "redirect:/board/list";
+        return "redirect:/board/list/1";
         //로그인 성공
 
     }
@@ -73,15 +74,16 @@ public class UserController {
             return "redirect:/user/join";
         }
         //회원가입 성공하면 로그인 처리
-        service.join(entity);
-        return "redirect:/board/list";
+        service.login(entity);
+        return "redirect:/board/list/1";
 
     }
 
-
-
-
-
+    @GetMapping("/logout")
+    public String logout(HttpSession hs){
+        hs.invalidate();
+        return "redirect:/user/login";
+    }
 
 
     }

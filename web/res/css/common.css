@@ -9,6 +9,10 @@ header{background-color: coral;}
 
 .font-color-white {color: #fff;}
 
+table, th, td { border: 1px solid #4f4f4f; border-collapse: collapse; }
+th, td { padding: 7px; }
+
+
 .h-50{height: 50px;}
 .h-100{height: 100px;}
 
@@ -17,3 +21,6 @@ header{background-color: coral;}
 
 .p-lr-10{padding: 0 10px;}
 .p-lr-20{padding: 0 20px;}
+
+.menu-selected{font-weight: bold;}
+.menu-selected a{color: #fc0000;}
