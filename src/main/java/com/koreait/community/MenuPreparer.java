@@ -19,7 +19,7 @@ public class MenuPreparer implements ViewPreparer {
 
     @Override
     public void execute(Request request, AttributeContext attributeContext) {
-        System.out.println(" -- Called MenuPreparer--excute method ---------");
+        //System.out.println(" -- Called MenuPreparer--excute method ---------");
         /*호출되는지 보기위해 적음*/
         attributeContext.putAttribute(Const.MENU_LIST,
                 new Attribute(mapper.selMenuCategoryList()),true);

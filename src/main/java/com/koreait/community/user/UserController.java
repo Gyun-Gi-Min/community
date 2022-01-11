@@ -6,6 +6,7 @@ import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -84,6 +85,20 @@ public class UserController {
         hs.invalidate();
         return "redirect:/user/login";
     }
+
+
+    @GetMapping("/mypage/profile")
+    public void mypageProfile(){
+
+    }
+
+    @ResponseBody  //ajax통신을 위해.
+    @PostMapping("/mypage/profile")
+    public String mypageProfileProc(MultipartFile profileimg){
+        System.out.println("fileName: "+ profileimg.getOriginalFilename());
+        return "{\"result\": \"Good규웃\"}";
+    }
+
 
 
     }

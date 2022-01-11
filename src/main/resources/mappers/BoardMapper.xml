@@ -39,6 +39,7 @@
     <update id="addHits">
         UPDATE t_board
         set hits = hits+1
+        , lastip = #{lastip}
         where iboard= ${iboard}
     </update>
 
@@ -51,24 +52,22 @@
             <if test=" ctnt != null and ctnt !=''">
                 ctnt=#{ctnt},
             </if>
-            <if test=" lastip != null and lastip !='' ">
-                lastip=#{lastip},
-            </if>
             <if test="isdel == 1">
                 isDel=1
+            --삭제된거처럼 꾸미는거
             </if>
         </set>
-        where  iboard = ${iboard}
-        <if test="lastip == null  ">
-            AND  iuser = ${iuser}
-        </if>
+        where iboard = ${iboard}
+        and iuser = ${iuser}
     </update>
+
 
     <delete id="delBoard">
         delete from t_board
         iboard=${iboard} and iuser=${iuser}
-
     </delete>
+
+
 
 
 

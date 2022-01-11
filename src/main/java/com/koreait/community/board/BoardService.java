@@ -30,12 +30,11 @@ public class BoardService {
 
     public BoardVo selBoardDetail(BoardDTO dto){ //iboard, lastip
         BoardVo detail = mapper.selBoardDetail(dto);
-        if(!Objects.equals(dto.getLastip(),detail.getLastip())){
+        if(dto.getLastip() != null && !Objects.equals(dto.getLastip(),detail.getLastip())){
             int hitsResult = mapper.addHits(dto);
             if(hitsResult == 1){
                 detail.setHits(detail.getHits()+1);
             }
-            mapper.updBoard(dto);
         }
             return detail;
     }
@@ -45,6 +44,17 @@ public class BoardService {
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setIsdel(1);
         return mapper.updBoard(entity); // icategory, iboard, iuser, isdel
+    }
+
+    public int updBoard(BoardEntity entity){
+        try{
+            entity.setIuser(userUtils.getLoginUserPk());
+            return mapper.updBoard(entity);
+        }catch (Exception e){
+            e.printStackTrace();
+            return 2; // 0
+        }
+
     }
 
 

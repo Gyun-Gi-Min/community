@@ -61,4 +61,22 @@ public class BoardController {
         return "redirect:/board/list/"+entity.getIcategory();
 
     }
+
+    @GetMapping("/mod")
+    public String mod(BoardDTO dto, Model model){
+        model.addAttribute(Const.DATA,service.selBoardDetail(dto));
+        return "board/write";
+
+    }
+
+    @PostMapping("/mod")
+    public String modProc(BoardEntity entity){
+        int result = service.updBoard(entity);
+        return "redirect:/board/detail?iboard=" + entity.getIboard();
+    }
+
+    @GetMapping("/mypage/profile")
+    public void mypageProfile() {}
 }
+
+

@@ -1,9 +1,8 @@
 {
-
 const dataElem =document.querySelector('#data');
 
+//삭제
 const delBtnElem = document.querySelector("#btnDel");
-
 if(delBtnElem){
     delBtnElem.addEventListener('click',()=>{
         const icategory = dataElem.dataset.icategory;
@@ -13,7 +12,17 @@ if(delBtnElem){
         }
     });
 }
-location.href=``;
+
+    //수정버튼
+    const modBtnElem = document.querySelector("#btnMod");
+
+    if(modBtnElem){
+        modBtnElem.addEventListener('click',() =>{
+            const iboard = dataElem.dataset.iboard;
+            location.href=`/board/mod?iboard=${iboard}`;
+        });
+    }
 
 
 }
+

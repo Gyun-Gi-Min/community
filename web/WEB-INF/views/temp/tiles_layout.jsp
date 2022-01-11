@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <!DOCTYPE html>
@@ -16,13 +15,13 @@
     <script defer src="/res/js/<tiles:getAsString name="common"/>.js?ver=2"></script>
     <script defer src="/res/js/<tiles:getAsString name="addr1"/>/index.js"></script>
     <script defer src="/res/js/<tiles:getAsString name="addr2"/>.js?ver=2"></script>
-    <title><tiles:insertAttribute name="title" ignore="true" /></title>
+    <title><tiles:getAsString name="title" /></title>
 </head>
 <body>
     <div id="container">
         <tiles:insertAttribute name="header"/>  <!--헤더가 들어옴-->
         <section>
-            <tiles:insertAttribute name="content"/>
+            <tiles:insertAttribute name="body"/>
         </section>
         <tiles:insertAttribute name="footer"/>
 

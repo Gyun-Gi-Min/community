@@ -13,10 +13,6 @@
     <c:set var = "lastPath" value="${splitURI[fn:length(splitURI)-1]}"/>
 </c:if>
 
-
-
-
-
 <header class="h-50">
     <div class="flex-container flex-align-center p-lr-20">
     <c:choose>
@@ -24,7 +20,7 @@
             <div class="m-r-20"><a href="/user/login" class="font-color-white">로그인</a> </div>
         </c:when>
         <c:otherwise>
-            <div class="m-r-20"><a href="/user/profile" class="font-color-white">프로필</a> </div>
+            <div class="m-r-20"><a href="/user/mypage/profile" class="font-color-white">마이페이지</a> </div>
             <div class="m-r-20"><a href="/user/logout" class="font-color-white">로그아웃</a> </div>
         </c:otherwise>
     </c:choose>
