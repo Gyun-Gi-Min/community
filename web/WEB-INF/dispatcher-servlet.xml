@@ -16,6 +16,8 @@
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/res/**" location="/res/"/> <!--res로 들어오면 파일로 들어온거니까 /res/ 하위파일로 인식해줘-->
+    <mvc:resources mapping="/images/**" location="file:///D:/upload/images/"/>
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>  <!--이거는 setter호출 하는것-->

@@ -1,4 +1,7 @@
 {
+    //data element
+    const dataElem = document.querySelector('#data');
+
 
 
     //input type="file"
@@ -23,7 +26,7 @@
         })
     }
 
-    //이미지 업로드드
+    //이미지 업로드
    const uploadProfileImg=(img) =>{
         const fData = new FormData();
         fData.append('profileimg',img);
@@ -34,10 +37,29 @@
         }).then(res=>res.json())
           .then(data=>{
               console.log(data);
+              setProfileImg(data); //추가
           })
           .catch((e)=>{
               console.log(e);
         });
     }
+
+
+    //이미지 세팅
+    const setProfileImg = (data) => {
+        if(!data.result){return;}
+
+        const iuser = dataElem.dataset.iuser;
+        const img = profileViewElem.querySelector('img');
+        //img태그 가져오는거'
+        img.src = `/images/user/${iuser}/${data.result}`;
+
+        //헤더 이미지
+        const headerProfileImgElem = document.querySelector('#header-profileimg');
+        headerProfileImgElem.src = src;
+    }
+
+
+
 
 }

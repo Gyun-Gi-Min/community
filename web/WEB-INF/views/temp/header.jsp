@@ -4,7 +4,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <tiles:importAttribute name="menuList"/>
 
-
 <c:set var ="currentPagePath" value="${requestScope['javax.servlet.forward.request_uri']}"/>
 <c:set var="lastPath" value="0"/>
 
@@ -20,7 +19,15 @@
             <div class="m-r-20"><a href="/user/login" class="font-color-white">로그인</a> </div>
         </c:when>
         <c:otherwise>
-            <div class="m-r-20"><a href="/user/mypage/profile" class="font-color-white">마이페이지</a> </div>
+            <c:set var="profileImg" value="/res/img/defaultProfile.jpg"/>
+            <c:if test="${sessionScope.loginUser.profileImg !=null}">
+                <c:set var="profileImg" value="/images/user/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}"/>
+            </c:if>
+            <div class="m-r-20"><a href="/user/mypage/profile">
+                <div class="circular--img wh-30"><img src="${profileImg}" id="header-profileimg"></div>
+            </a>
+
+            </div>
             <div class="m-r-20"><a href="/user/logout" class="font-color-white">로그아웃</a> </div>
         </c:otherwise>
     </c:choose>
