@@ -50,9 +50,11 @@
         if(!data.result){return;}
 
         const iuser = dataElem.dataset.iuser;
-        const img = profileViewElem.querySelector('img');
-        //img태그 가져오는거'
-        img.src = `/images/user/${iuser}/${data.result}`;
+        const src = `/images/user/${iuser}/${data.result}`;
+
+        //이미지 바꿀때 헤더도 같이 바뀌도록?
+        const profileImgElem = profileViewElem.querySelector('img');
+        profileImgElem.src =src;
 
         //헤더 이미지
         const headerProfileImgElem = document.querySelector('#header-profileimg');

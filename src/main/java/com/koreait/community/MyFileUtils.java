@@ -34,6 +34,14 @@ public class MyFileUtils {
         if(isDelFolder){file.delete();}
     }
 
+    //파일 존재하면 삭제
+    public void delFile(String path){
+        File f = new File(path);
+        if(f.exists()){
+            f.delete();  
+        }
+    }
+
     //랜덤파일명 만들기
     public String getRandomFileNm(){
         return UUID.randomUUID().toString();

@@ -31,9 +31,6 @@
 
 
 
-
-
-
     <mybatis-spring:scan base-package="com.koreait.community"/>
 
 

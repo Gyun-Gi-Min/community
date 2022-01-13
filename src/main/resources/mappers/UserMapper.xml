@@ -22,8 +22,8 @@
         <if test=" upw != null and upw != '' ">
             upw = #{upw}
         </if>
-        <if test=" profileImg != null and profileImg != '' ">
-            profileImg = #{profileImg}
+        <if test=" profileimg != null and profileimg != '' ">
+            profileimg = #{profileimg}
         </if>
         WHERE iuser = ${iuser}
     </update>

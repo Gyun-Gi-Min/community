@@ -74,17 +74,27 @@ public class UserService {
     public String uploadProfileImg(MultipartFile mf){
         //압축으로 들어간다??
         if(mf == null){return  null;} //null 체크
-        final String PATH = Const.UPLOAD_IMG_PATH + "/user/" + userUtils.getLoginUserPk();
+
+        UserEntity loginUser = userUtils.getLoginUser();
+
+        final String PATH = Const.UPLOAD_IMG_PATH + "/user/" + loginUser.getIuser();
         String fileNm = fileUtils.saveFile(PATH,mf);
         System.out.printf(" fileNm : " + fileNm);
-
         if(fileNm == null){return  null;}
 
-        //파일명을 t_user 테이블에 update
         UserEntity entity = new UserEntity();
-        entity.setIuser(userUtils.getLoginUserPk());
-        entity.setProfileImg(fileNm);
+        entity.setIuser(loginUser.getIuser());
+
+        //기존 파일명
+        String oldFilePath = PATH + "/" + userUtils.getLoginUser().getProfileimg();
+        fileUtils.delFile(oldFilePath);
+
+        //파일명을 t_user 테이블에 update
+        entity.setProfileimg(fileNm);
         mapper.updUser(entity);
+
+        //세션 프로필 파일명을 수정해 준다.
+        loginUser.setProfileimg(fileNm);
 
         return fileNm;
     }
