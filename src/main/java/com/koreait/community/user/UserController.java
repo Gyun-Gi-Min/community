@@ -1,6 +1,7 @@
 package com.koreait.community.user;
 
 import com.koreait.community.Const;
+import com.koreait.community.model.UserDto;
 import com.koreait.community.model.UserEntity;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +106,33 @@ public class UserController {
         result.put("result",fileNm);
         return result;
     }
+
+
+    @GetMapping("/mypage/password")
+    public void password(){
+
+    }
+
+    @PostMapping("/mypage/password")
+    public String passwordProc(UserDto dto,HttpSession hs, RedirectAttributes rAttr){
+        int result = service.changePassword(dto);
+        if(result != 1){
+            switch (result){
+                case 0:
+                    rAttr.addFlashAttribute(Const.MSG,"비밀번호 변경에 실패하였습니다.");
+                    break;
+                case 2:
+                rAttr.addFlashAttribute(Const.MSG,"현재 비밀번호를 확인해 주세요.");
+                break;
+            }
+            return "redirect:/user/mypage/password";
+        }
+        hs.invalidate();
+        return "redirect:/user/logout";
+    }
+
+
+
 }
 
 

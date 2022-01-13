@@ -3,6 +3,7 @@
 <%@ taglib prefix="my" uri="tld/MyCustomJstlTag.tld" %>
 <div id="data" data-iuser="${sessionScope.loginUser.iuser}"></div>
 <div class="flex-container flex-direction-column flex-align-center">
+
     <my:profileImg idVal="profile-view"
                    classVal="pointer circular--img wh-300"
                    iuser="${sessionScope.loginUser.iuser}"

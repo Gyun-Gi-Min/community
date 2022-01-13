@@ -27,7 +27,7 @@ public class MenuPreparer implements ViewPreparer {
 
         List<SubMenuVo> subMenuList = new ArrayList<>();
         subMenuList.add(new SubMenuVo("profile", "프로필"));
-        subMenuList.add(new SubMenuVo("changepw", "비밀번호 변경"));
+        subMenuList.add(new SubMenuVo("password", "비밀번호 변경"));
 
         attributeContext.putAttribute(Const.SUB_MENU_LIST,
                 new Attribute(subMenuList), true);
