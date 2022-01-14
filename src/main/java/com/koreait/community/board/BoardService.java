@@ -3,6 +3,7 @@ package com.koreait.community.board;
 import com.koreait.community.UserUtils;
 import com.koreait.community.model.BoardDTO;
 import com.koreait.community.model.BoardEntity;
+import com.koreait.community.model.BoardPrevNextVo;
 import com.koreait.community.model.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,8 @@ public class BoardService {
     }
 
 
+
+
     public int delBoard(BoardEntity entity){
         entity.setIuser(userUtils.getLoginUserPk());
         entity.setIsdel(1);
@@ -57,7 +60,9 @@ public class BoardService {
         }
 
     }
-
+    public BoardPrevNextVo selPrevNext(BoardVo vo){
+        return mapper.selPrevNext(vo);
+    }
 
 
 

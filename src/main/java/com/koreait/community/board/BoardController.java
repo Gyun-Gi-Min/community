@@ -4,6 +4,7 @@ package com.koreait.community.board;
 import com.koreait.community.Const;
 import com.koreait.community.model.BoardDTO;
 import com.koreait.community.model.BoardEntity;
+import com.koreait.community.model.BoardPrevNextVo;
 import com.koreait.community.model.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,13 @@ public class BoardController {
         //System.out.println("lastIp : " + lastIp);
         dto.setLastip(lastIp);
         model.addAttribute(Const.DATA, service.selBoardDetail(dto));
+
+        BoardVo vo = service.selBoardDetail(dto);
+        BoardPrevNextVo pnVo = service.selPrevNext(vo);
+        model.addAttribute(Const.DATA, vo);
+        model.addAttribute(Const.PREV_NEXT,pnVo);
+
+
     }
 
 
