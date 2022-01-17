@@ -9,7 +9,10 @@
             <button id="delBtn">삭제</button>
         </div>
     </c:if>
-    <div id="data" data-icategory="${data.icategory}" data-iboard="${data.iboard}"></div>
+    <div id="data"
+         data-icategory="${data.icategory}"
+         data-iboard="${data.iboard}"
+         data-iuser ="${sessionScope.loginUser.iuser}"></div>
     <div>
         <a href="/board/detail?iboard=${requestScope.prevNext.previboard}" class="${requestScope.prevNext.previboard == 0 ? 'invisibility' : ''}"><button>이전글</button></a>
         <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}" class="${requestScope.prevNext.nextiboard == 0 ? 'invisibility' : ''}"><button>다음글</button></a>

@@ -79,7 +79,7 @@
                     <th>no</th>
                     <th>content</th>
                     <th>writer</th>
-                    <th></th>
+                    <th>비고!</th>
                 </tr>
             `;
             list.forEach(item =>{
@@ -103,10 +103,39 @@
                 const td= document.createElement('td');
                 tr.appendChild(td);
 
+                if(parseInt(dataElem.dataset.iuser) === item.iuser) {
+                    const modBtn = document.createElement('input');
+                    modBtn.type = 'button';
+                    modBtn.value = '수정';
+
+                    const delBtn = document.createElement('input');
+                    delBtn.type = 'button';
+                    delBtn.value = '삭제';
+
+                    delBtn.addEventListener('click', ()=>{
+                        if(confirm('삭제할껀가요??')){
+                            delCmt(item.icmt,tr);
+                        }
+                    });
+
+                    td.appendChild(modBtn);
+                    td.appendChild(delBtn);
+                }
+
                 table.appendChild(tr);
             });
             cmtListElem.appendChild(table);
-f        }
+       }
+
+        const delCmt = (icmt, tr) =>{
+            myFetch.delete(`/board/cmt/${icmt}`,(data) =>{
+                if(data.result){
+                    tr.remove();
+                }else{
+                    alert('댓글을 삭제할 수 없습니다.');
+                }
+            });
+        }
 
         getCmtList();
     }
