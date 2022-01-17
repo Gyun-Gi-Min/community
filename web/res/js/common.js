@@ -30,26 +30,25 @@ const regex = {
 }
 
 const myFetch = {
-
-    send: function (fetchObj, cb){
+    send: function(fetchObj, cb) {
         return fetchObj
-            .then(res =>{res.json(); } )
+            .then(res => res.json())
             .then(cb)
-            .catch(e => {console.log(e);});
+            .catch(e => { console.log(e) });
     },
-    get: function (url,cb,param){
-        if(param){
-            const queryString ='?' + Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
+    get: function(url, cb, param) {
+        if(param) {
+            const queryString = '?' + Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
             url += queryString;
         }
+
         return this.send(fetch(url), cb);
     },
-    post : function (url, cb ,param){
-        return this.send(fetch(url,{
-            'method':'post',
-            'headers' : {'Content-Type' : 'application/json'},
-            'body' : JSON.stringify(param)
-            //JSON.stringify 은 JSON 형태로 바꿔줌.
-        }),cb);
+    post: function(url, cb, param) {
+        return this.send(fetch(url, {
+            'method': 'post',
+            'headers': { 'Content-Type': 'application/json' },
+            'body': JSON.stringify(param)
+        }), cb);
     }
 }
