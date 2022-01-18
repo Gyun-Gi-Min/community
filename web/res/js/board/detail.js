@@ -63,7 +63,6 @@
         }
     }
 
-    const cmtListElem = document.querySelector('#cmt_list');
     //통신 시작!!!
     const getCmtList = () => {
         const iboard = dataElem.dataset.iboard;
@@ -72,12 +71,24 @@
 
     //통신 결과물 세팅
     const setCmtList = (list) => {
+        const cmtListElem = document.querySelector('#cmt_list');
+
         //댓글이 없으면 "댓글 없음"
         if(list.length === 0) {
             cmtListElem.innerText = '댓글 없음!';
             return;
         }
 
+        const table = makeTable();
+        cmtListElem.appendChild(table);
+
+        list.forEach(item => {
+            const tr = makeTr(item);
+            table.appendChild(tr);
+        });
+    }
+
+    const makeTable = () => {
         const table = document.createElement('table');
         table.innerHTML = `
             <tr>
@@ -86,18 +97,10 @@
                 <th>writer</th>
                 <th></th>
             </tr>`;
-        list.forEach(item => {
-            makeTr(table, item);
-        });
-        cmtListElem.appendChild(table);
+        return table;
     }
 
-    const makeTable = () => {
-
-    }
-
-
-    const makeTr = (table, item) => {
+    const makeTr = item => {
         const tr = document.createElement('tr');
 
         const imgSrc = item.profileimg === null
@@ -135,7 +138,7 @@
             td.appendChild(modBtn);
             td.appendChild(delBtn);
         }
-        table.appendChild(tr);
+        return tr;
     }
 
     const delCmt = (icmt, tr) => {
