@@ -13,9 +13,10 @@ public class BoardCmtService {
         @Autowired private UserUtils userUtils;
         @Autowired private BoardCmtMapper mapper;
 
-        public int insBoardCmt(BoardCmtEntity entity){
-            entity.setIuser(userUtils.getLoginUserPk());
-            return mapper.insBoardCmt(entity);
+        public int insBoardCmt(BoardCmtEntity entity){ //iboard, ctnt
+            entity.setIuser(userUtils.getLoginUserPk()); //iboard, ctnt, iuser
+            mapper.insBoardCmt(entity);//icmt ,iboard, ctnt, iuser
+            return entity.getIcmt();
         }
 
         public List<BoardCmtVo> selBoardCmtList(int iboard) {

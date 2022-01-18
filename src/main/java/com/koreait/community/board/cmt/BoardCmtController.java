@@ -20,7 +20,7 @@ public class BoardCmtController {
 
     @PostMapping
     public Map<String, Integer> insBoardCmt(@RequestBody BoardCmtEntity entity){
-        System.out.println(entity);
+        System.out.println(entity); //iboard, ctnt
         Map<String, Integer> result = new HashMap<>();
         result.put("result", service.insBoardCmt(entity));
         return result;
