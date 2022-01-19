@@ -38,25 +38,26 @@
 
     <select id="selPrevNext" resultType="BoardPrevNextVo">
         <![CDATA[
-        select (
-            select iboard from t_board
-            where isdel = 0
-            and icategory = ${icategory}
-            and iboard > ${iboard}
-            order by iboard
-            limit 1
+        SELECT
+        IFNULL(
+            (SELECT iboard
+               FROM t_board
+              WHERE isdel = 0
+                AND icategory = ${icategory}
+                AND iboard > ${iboard}
+              ORDER BY iboard
+              LIMIT 1), 0
         ) AS previboard,
-        (
-        select iboard from t_board
-        where isdel = 0
-        and icategory = ${icategory}
-        and iboard < ${iboard}
-        order by iboard desc
-        limit 1
-        ) AS nextiboard
+        IFNULL(
+            (SELECT iboard FROM t_board
+              WHERE isdel = 0
+                AND icategory = ${icategory}
+                AND iboard < ${iboard}
+              ORDER BY iboard DESC
+              LIMIT 1), 0
+        )AS nextiboard
         ]]>
     </select>
-
 
 
     <update id="addHits">

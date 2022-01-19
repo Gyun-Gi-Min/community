@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <div class="p-10">
     <c:if test="${sessionScope.loginUser.iuser == data.iuser}">
         <div>
@@ -9,10 +7,13 @@
             <button id="delBtn">삭제</button>
         </div>
     </c:if>
+
     <div id="data"
          data-icategory="${data.icategory}"
          data-iboard="${data.iboard}"
-         data-iuser ="${sessionScope.loginUser.iuser}"></div>
+         data-nm="${sessionScope.loginUser.nm}"
+         data-iuser="${sessionScope.loginUser.iuser}"
+         data-profileimg="${sessionScope.loginUser.profileimg}"></div>
     <div>
         <a href="/board/detail?iboard=${requestScope.prevNext.previboard}" class="${requestScope.prevNext.previboard == 0 ? 'invisibility' : ''}"><button>이전글</button></a>
         <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}" class="${requestScope.prevNext.nextiboard == 0 ? 'invisibility' : ''}"><button>다음글</button></a>
@@ -33,11 +34,5 @@
             </form>
         </div>
     </c:if>
-    <div class="m-t-20" id="cmt_list" data-ctnt="${requestScope.result}" >
-
-    </div>
-
-
-
-
+    <div class="m-t-20" id="cmt_list"></div>
 </div>

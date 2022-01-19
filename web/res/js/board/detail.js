@@ -1,7 +1,7 @@
 {
     const dataElem = document.querySelector('#data');
 
-    //삭제 버튼
+    //글 삭제 버튼
     const delBtnElem = document.querySelector('#delBtn');
     if(delBtnElem) {
         delBtnElem.addEventListener('click', ()=> {
@@ -14,7 +14,7 @@
         });
     }
 
-    //수정 버튼
+    //글 수정 버튼
     const modBtnElem = document.querySelector('#modBtn');
     if(modBtnElem) {
         modBtnElem.addEventListener('click', ()=> {
@@ -54,9 +54,26 @@
                         alert('댓글 등록에 실패하였습니다.');
                         break;
                     default:
+                        //기존 table태그가 있는지 확인
+                        const cmtListElem = document.querySelector('#cmt_list');
+                        let table = cmtListElem.querySelector('table');
+                        if(!table) { //없으면 table 생성!
+                            cmtListElem.innerHTML = null; //댓글 없음 내용 삭제!
+                            table = makeTable();
+                            cmtListElem.appendChild(table);
+                        }
+                        const item = {
+                            icmt: data.result,
+                            iuser: parseInt(dataElem.dataset.iuser),
+                            writernm: dataElem.dataset.nm,
+                            profileimg: dataElem.dataset.profileimg,
+                            ctnt: cmtFrmElem.ctnt.value,
+                        }
+                        const tr = makeTr(item);
+                        table.appendChild(tr);
+                        window.scrollTo(0, document.body.scrollHeight);
+
                         cmtFrmElem.ctnt.value = null;
-
-
                         break;
                 }
             }, param);
@@ -124,6 +141,56 @@
             const modBtn = document.createElement('input');
             modBtn.type = 'button';
             modBtn.value = '수정';
+            modBtn.addEventListener('click', () => {
+                const tdArr = tr.querySelectorAll('td');
+                const tdCell = tdArr[1];
+
+                const modInput = document.createElement('input');
+                modInput.value = item.ctnt;
+                const saveBtn = document.createElement('input')
+                saveBtn.type = 'button';
+                saveBtn.value = '저장';
+                saveBtn.addEventListener('click', () => {
+                    const param = {
+                        icmt: item.icmt,
+                        ctnt: modInput.value
+                    }
+                    myFetch.put('/board/cmt', data => {
+                        switch(data.result) {
+                            case 0:
+                                alert('댓글 수정에 실패하였습니다.')
+                                break;
+                            case 1:
+                                tdCell.innerText = modInput.value;
+                                item.ctnt = modInput.value;
+                                removeCancelBtn();
+                                break;
+                        }
+                    }, param);
+                });
+
+                tdCell.innerHTML = null;
+                tdCell.appendChild(modInput);
+                tdCell.appendChild(saveBtn);
+
+                const cancelBtn = document.createElement('input');
+                cancelBtn.type = 'button';
+                cancelBtn.value = '취소';
+                cancelBtn.addEventListener('click', () => {
+                    tdCell.innerText = item.ctnt;
+                    removeCancelBtn();
+                });
+
+                const removeCancelBtn = () => {
+                    modBtn.classList.remove('hidden');
+                    delBtn.classList.remove('hidden');
+                    cancelBtn.remove();
+                }
+
+                td.insertBefore(cancelBtn, modBtn);
+                modBtn.classList.add('hidden');
+                delBtn.classList.add('hidden');
+            });
 
             const delBtn = document.createElement('input');
             delBtn.type = 'button';
@@ -141,18 +208,29 @@
         return tr;
     }
 
+    //댓글 삭제
     const delCmt = (icmt, tr) => {
         myFetch.delete(`/board/cmt/${icmt}`, data => {
             if(data.result) {
                 tr.remove();
+
+                //만약 댓글이 하나도 없다면
+                if(getTrLen() === 1) {
+                    const cmtListElem = document.querySelector('#cmt_list');
+                    cmtListElem.innerText = '댓글 없음!';
+                }
             } else {
                 alert('댓글을 삭제할 수 없습니다.');
             }
         });
     }
-
     getCmtList();
+}
 
+const getTrLen = () => {
+    const cmtListElem = document.querySelector('#cmt_list');
+    const trArr = cmtListElem.querySelectorAll('table tr');
+    return trArr.length;
 }
 
 // Restful API > POST, GET, PUT, DELETE

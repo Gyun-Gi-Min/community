@@ -31,6 +31,13 @@ public class BoardCmtController {
         System.out.println("iboard : " + iboard);
         return service.selBoardCmtList(iboard);
     }
+    @PutMapping
+    public Map<String, Integer> updBoardCmt(@RequestBody BoardCmtEntity entity){
+        Map<String,Integer> result = new HashMap<>();
+        result.put("result", service.updBoardCmt(entity));
+        return result;
+    }
+
 
     @DeleteMapping("/{icmt}")
     public Map<String, Integer> delBoardCmt(@PathVariable int icmt){
