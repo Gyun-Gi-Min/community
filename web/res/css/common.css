@@ -23,6 +23,8 @@ ul { list-style: none; }
 .flex-container { display: flex; height: 100%; width: 100%; }
 .flex-direction-column { flex-direction: column; }
 
+.fs-20 {font-size:  20px;}
+.fs-30 {font-size:  30px;}
 .font-color-white { color: #fff; }
 .grid { display: grid; }
 

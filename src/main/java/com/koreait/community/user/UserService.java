@@ -19,7 +19,6 @@ public class UserService {
 
     @Autowired
     private UserMapper mapper;
-
     @Autowired
     private UserUtils userUtils;
 

@@ -7,7 +7,6 @@
 
     <select id="selMenuCategoryList" resultType="BoardCategoryEntity">
         SELECT * FROM t_board_category ORDER BY orderby
-
     </select>
 
 </mapper>

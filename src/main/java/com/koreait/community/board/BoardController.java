@@ -49,7 +49,7 @@ public class BoardController {
         String lastIp=req.getHeader("X-FORWARDED-FOR");
         if(lastIp == null){
             lastIp = req.getRemoteAddr();
-        }
+        } //IP 확인하는거
         //System.out.println("lastIp : " + lastIp);
         dto.setLastip(lastIp);
         model.addAttribute(Const.DATA, service.selBoardDetail(dto));

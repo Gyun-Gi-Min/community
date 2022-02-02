@@ -4,22 +4,21 @@
 <mapper namespace="com.koreait.community.board.fav.FavMapper">
 
     <insert id="insBoardFav">
-        insert into t_board_fav (iboard,iuser)
-        values (#{iboard},#{iuser})
+        INSERT INTO t_board_fav (iboard, iuser)
+        VALUES (${iboard}, ${iuser})
     </insert>
 
     <select id="selBoardFav" resultType="BoardFavEntity">
-        select iboard, iuser, rdt
-        from t_board_fav
-        where iboard = #{iboard}
-        and iuser = #{iuser}
+        SELECT iboard, iuser, rdt
+        FROM t_board_fav
+        WHERE iboard = ${iboard}
+        AND iuser = ${iuser}
     </select>
 
     <delete id="delBoardFav">
-        Delete from t_board_fav
-        where iboard = #{iboard}
-        and iuser = #{iuser}
+        DELETE FROM t_board_fav
+        WHERE iboard = ${iboard}
+        AND iuser = ${iuser}
     </delete>
-
 
 </mapper>

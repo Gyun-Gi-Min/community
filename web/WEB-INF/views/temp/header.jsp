@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="my" uri="tld/MyCustomJstlTag.tld" %>
 <tiles:importAttribute name="menuList"/>
+
 <c:set var="currentPagePath" value="${requestScope['javax.servlet.forward.request_uri']}" />
 <c:set var="splitURI" value="${fn:split(currentPagePath, '/')}"/>
 <c:set var="lastPath" value="${splitURI[fn:length(splitURI) - 1]}"/>

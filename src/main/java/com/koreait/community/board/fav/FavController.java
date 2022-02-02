@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/board/fav")
 public class FavController {
 
@@ -18,10 +18,8 @@ public class FavController {
 
     @PostMapping
     public Map<String, Integer> insBoardFav(@RequestBody BoardFavEntity entity){
-        System.out.println(entity);
         Map<String, Integer> result = new HashMap<>();
-        result.put("result",service.insBoardFav(entity));
-        System.out.println(result);
+        result.put(Const.RESULT,service.insBoardFav(entity));
         return result;
     }
 
